@@ -2,9 +2,18 @@
 A naive image compression technique using low-rank matrix approximations obtained from the SVD.
 
 ## Background
-The basic idea is that we represent the image as a matrix and compress it using a low-rank approximation. This is achieved using the [Eckart–Young–Mirsky](https://en.wikipedia.org/wiki/Low-rank_approximation) theorem. 
+The basic idea is that we represent the image as a matrix and compress it using a low-rank approximation.
 
-Suppose $\boldsymbol A \in \mathbb R^{m\times n}$ is a matrix represention of an $m$ by $n$ image (or at least one colour channel of the image). Let its Singular Value Decomposition (SVD) be given by,
+Suppose $\boldsymbol A \in \mathbb R^{m\times n}$ is a matrix represention of an $m$ by $n$ image (or at least one colour channel of the image) and let $\boldsymbol A_k$ denote its rank $k$ approximation. The problem here is to find the matrix $\boldsymbol A_k$ such that,
+
+$$
+\Vert \boldsymbol A - \boldsymbol A_k \Vert \quad\text{is minimised with repsect to the constraint that}\quad \text{rank}(\boldsymbol A_k) \leq k
+$$
+
+It turns out that the solution to this problem when using both the matrix Frobenius norm and the spectral norm is related to the Singular Value Decomposition (SVD) of $\boldsymbol A$. This is described by the [Eckart–Young–Mirsky](https://en.wikipedia.org/wiki/Low-rank_approximation) theorem. 
+
+
+Suppose $\boldsymbol A$ has an SVD given by,
 
 $$
 \boldsymbol A = \boldsymbol U \boldsymbol \Sigma \boldsymbol V^T
